@@ -1,0 +1,13 @@
+extends: pilot_existing.yaml
+dataset_profile: synthetic_smoke
+protocol_id: SYNTHETIC-ONLY-lab-smoke-A
+patch_size: 32
+batch_size: 4
+epochs: 2
+early_stopping_patience: 3
+mixed_precision: false
+num_workers: 0
+cpu_threads: 2
+training: {device: cpu}
+pilot: {quotas_per_view: null}
+lab: {training_seeds: [1337], bootstrap_replicates: 50}

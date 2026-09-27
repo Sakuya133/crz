@@ -1,0 +1,13 @@
+# Non-Torch dependencies tested with Python 3.12.
+# Use an existing lab environment with a compatible torch/torchvision pair.
+# No CUDA/driver choice or automatic environment creation here.
+numpy==2.5.2
+pandas==3.0.5
+Pillow==12.3.0
+PyYAML==6.0.3
+matplotlib==3.11.2
+psutil==7.2.2
+scikit-learn==1.9.1
+# Full SRM + LinearSVC (not needed for CNN-only execution):
+scipy==1.18.1
+sealwatch==2025.9

@@ -1,0 +1,20 @@
+extends: pilot_existing.yaml
+dataset_profile: full_all_eligible
+full_expected_metadata_images: 112120
+protocol_id: nih-full-eligible-lsbm-fullimage-crop256-v1-A
+pilot: {quotas_per_view: null}
+paths:
+  patient_assignments: data/manifests/full/patient_assignments.csv
+  split_manifest: data/manifests/full/splits.csv
+  pair_manifest: data/manifests/full/bpp02/cover_stego.csv
+  generation_manifest: data/manifests/full/bpp02/stego_generation.csv
+  stego_dir: data/manifests/full/bpp02/stego
+  output_dir: outputs/full
+lab:
+  models: [highpass, srnet]
+  cohort: confirmatory_unseen_patient
+expansion:
+  training_seeds: [1337, 2026, 42]
+  payloads_bpp: [0.2, 0.1, 0.4]
+  priority_payload_bpp: 0.2
+  no_implicit_sampling: true

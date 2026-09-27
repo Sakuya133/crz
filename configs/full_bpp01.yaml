@@ -1,0 +1,7 @@
+extends: full_all_eligible.yaml
+payload_bpp: 0.1
+paths:
+  pair_manifest: data/manifests/full/bpp01/cover_stego.csv
+  generation_manifest: data/manifests/full/bpp01/stego_generation.csv
+  stego_dir: data/manifests/full/bpp01/stego
+  output_dir: outputs/full_bpp01

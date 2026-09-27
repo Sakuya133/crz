@@ -1,0 +1,10 @@
+extends: pilot_existing.yaml
+protocol_id: nih-images001-lsbm-fullimage-crop256-v2-B
+training:
+  train_view: ALL
+  mixed_pairs_per_view: 350
+  groupdro_step_size: 0.01
+  selection_metric: macro_view_auc
+lab:
+  models: [highpass]
+  objectives: [erm, groupdro]

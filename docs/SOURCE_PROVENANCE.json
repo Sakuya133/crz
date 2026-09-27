@@ -1,0 +1,569 @@
+{
+  "source_project": "cxr-steganalysis",
+  "source_revision": "Not a valid Git repository at export; SHA-256 hashes below, no invented commit",
+  "destination_project": "cxr-steganalysis-empirical",
+  "snapshot_scope": "Historical import snapshot before repository cleanup and the final package-version edit; not a current file inventory. Removed CLI wrappers remain listed for provenance.",
+  "copied_scope": "Audited local implementation, selected CLIs, tests, bibliography. No venv, raw data, author repository, old outputs, or checkpoints copied.",
+  "files": [
+    {
+      "path": "src/cxr_steganalysis/__init__.py",
+      "source_sha256": "0454000f74b2fe703a5b78766a5cf1182d9d9ef0b8891ee58995614025c132a6",
+      "empirical_sha256": "59bdc01db7cb4b3314bee93bf42c0f74b8675d25b98bb836c1ec90e558394744",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/config.py",
+      "source_sha256": "27b80e1d995be5177224abe9cac131cd35383156b970672c965603f89b4788b9",
+      "empirical_sha256": "3beeaca41d550d8331fddb2af1dd3c3cf2db710c7ba4f1d32d2cea2cb38ab5c0",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "src/cxr_steganalysis/data/__init__.py",
+      "source_sha256": "c44e25546118c8b132ef8d746af63f6081988f457c7f74411a6486744453ee0b",
+      "empirical_sha256": "fbc337038ab077865957b062c22df71f97299fc2483331aa4dc2eb8dd7fad285",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/dataset.py",
+      "source_sha256": "999bd6bbe68abc6ed2a190c475f2047a2c1550e965e488cd1dffcac84a5226bd",
+      "empirical_sha256": "6369d5b0bcf57c2a1ce2a4637b9b0bbc61c5d36a055392256d92f0a15505457c",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/full_dataset.py",
+      "source_sha256": "f70bb320adb3acb67f59e05e3bbccc382f5e8696977042dcc30f8c7cd8239926",
+      "empirical_sha256": "3516435977e5498d0efd5485e2b6f56e6be0a78d06a945443f02beb4914cb106",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "src/cxr_steganalysis/data/manifest.py",
+      "source_sha256": "91c9c581635e20ea7b3ebde66824ab9b3eda26da082368b200bd6bf7f22b4087",
+      "empirical_sha256": "91c9c581635e20ea7b3ebde66824ab9b3eda26da082368b200bd6bf7f22b4087",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/metadata.py",
+      "source_sha256": "de47c852589269ddc385cf6eb3148afffd7c7c7f55a9dd70c9e02dff68b1fd99",
+      "empirical_sha256": "de47c852589269ddc385cf6eb3148afffd7c7c7f55a9dd70c9e02dff68b1fd99",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/relocate.py",
+      "source_sha256": "e95f97880da3817224643721da34f646905ab8e6a3f0c21c4bdb5346e9f3ee35",
+      "empirical_sha256": "e95f97880da3817224643721da34f646905ab8e6a3f0c21c4bdb5346e9f3ee35",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/split.py",
+      "source_sha256": "91748b22dee62be4ac694fc87474746842ac00f4c9252092989da7f6195dfbc4",
+      "empirical_sha256": "91748b22dee62be4ac694fc87474746842ac00f4c9252092989da7f6195dfbc4",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/data/synthetic.py",
+      "source_sha256": "2892f8c8e78cc11a8828e5f103408fdd188388c73d48b88abf95ab68a43bf371",
+      "empirical_sha256": "a2f252933808a7957b5cb18b6a8c7208ee97f4c747b30fc8eea3c2769fcb2d45",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/evaluation/__init__.py",
+      "source_sha256": "9e7136a3f14aa8c9eb9003827ec381bd02fa91b30d52109203334416edf77a9e",
+      "empirical_sha256": "1363e1f76356d50369871e9fd18e48136207bc69a4ee9cc3877a8c9d55edd716",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/evaluation/cluster_bootstrap.py",
+      "source_sha256": "db34d38351ee7eea2de54b366628bd7db0afd463b1dae6b1c046d2223b5a65df",
+      "empirical_sha256": "1afb40da82031f45e11a2300607cafbcceb3acd8d410710baf277f4991d6e5c2",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "src/cxr_steganalysis/evaluation/cross_view.py",
+      "source_sha256": "cb1b5553369cb8db76915c9141f5aca6a0dd01de857ac922ff6616c1999d90d4",
+      "empirical_sha256": "cb1b5553369cb8db76915c9141f5aca6a0dd01de857ac922ff6616c1999d90d4",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/evaluation/mixed_bootstrap.py",
+      "source_sha256": "9fe55bceb96aad3797058c2f69adcf96b04d89576076eb545063cfaa9dfe9ece",
+      "empirical_sha256": "9fe55bceb96aad3797058c2f69adcf96b04d89576076eb545063cfaa9dfe9ece",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/experiment.py",
+      "source_sha256": "50e2b1543aa3eecd4f02ed85d260eb6c70f0455505cba8b6db515fce91fccba5",
+      "empirical_sha256": "50e2b1543aa3eecd4f02ed85d260eb6c70f0455505cba8b6db515fce91fccba5",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/__init__.py",
+      "source_sha256": "d475d6769c140a827eed8cb504247aee0f19e23fb88085328b0d88fe6524a12f",
+      "empirical_sha256": "d475d6769c140a827eed8cb504247aee0f19e23fb88085328b0d88fe6524a12f",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/factory.py",
+      "source_sha256": "8125641cbbaabf4fa80c0673caf33f53493449bc467ad60520d16e9789039245",
+      "empirical_sha256": "8125641cbbaabf4fa80c0673caf33f53493449bc467ad60520d16e9789039245",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/hsmnet_adapter.py",
+      "source_sha256": "65918fc034678bbc434620ef2d433a026e6e05a3e6361e5b6a613339a8f3c0bb",
+      "empirical_sha256": "65918fc034678bbc434620ef2d433a026e6e05a3e6361e5b6a613339a8f3c0bb",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/residual_cnn.py",
+      "source_sha256": "bb19504dbe019f73c70d1932662bde42bfae9c1084dbfeddd708c1a51f42d661",
+      "empirical_sha256": "b45441f4ddb9bbc6c3b6f49ab841956c53c227a473aaffd9d5d9225f979031c4",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/srm_svm.py",
+      "source_sha256": "03a2266ab3cd6e538cb3ef8460eadbcd1b232e854a422414c6883bf595387e28",
+      "empirical_sha256": "03a2266ab3cd6e538cb3ef8460eadbcd1b232e854a422414c6883bf595387e28",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/models/srnet.py",
+      "source_sha256": "1d2b9b834ae75b3b30ac35c2880d332c59312e0620eff3e18ec0bba47b42168c",
+      "empirical_sha256": "6813fb13e6ed865847fb0b87ae0abc57d69b7970ab217f74e856d83d66fdaefe",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/protocol_lock.py",
+      "source_sha256": "f5aa7e94325aa09ccd6143f2aeae4f17dba535e11bc116f5e08f8a95d6cb4305",
+      "empirical_sha256": "f5aa7e94325aa09ccd6143f2aeae4f17dba535e11bc116f5e08f8a95d6cb4305",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/provenance.py",
+      "source_sha256": "83696d8660602d8f105c0e5d5fdc3bd2c9852a74b4b532d39fa01184c609c2fd",
+      "empirical_sha256": "83696d8660602d8f105c0e5d5fdc3bd2c9852a74b4b532d39fa01184c609c2fd",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/reproducibility.py",
+      "source_sha256": "a2f9f878aae3cd7d63a6d82876edac7b0a81574dff361deda244434c379f2bac",
+      "empirical_sha256": "a2f9f878aae3cd7d63a6d82876edac7b0a81574dff361deda244434c379f2bac",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/stego/__init__.py",
+      "source_sha256": "e7215c36707d3f7dda249bd641643e2dd2fc06d71bfcca1a976cd277859f1656",
+      "empirical_sha256": "6e55c148973466ab01b861dd59f678644187491f26cb6440bbfbfb2af045b23b",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/stego/lsb_matching.py",
+      "source_sha256": "65fef063f3e1fb6342b2882c237612f9497441d1428dfa07ff7ea448856effc6",
+      "empirical_sha256": "913f27b1386b8c0e872db8f84ca095288f25dd4ae5b81a3be5a32aa4010094c0",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "src/cxr_steganalysis/training/__init__.py",
+      "source_sha256": "92632fa5087dd2cc3d1a7115f69d2f671c09581e7711d0403bcaa598da9837e0",
+      "empirical_sha256": "37bbb2cd36ba526ecb9e856ae6bdbbc06770dc6ce22001f1f76abe5a16597a6f",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/training/checkpoint.py",
+      "source_sha256": "62a3f0c6c7fb219511111e2174e275b11165d140c72f93646f2b12d4e6e9c431",
+      "empirical_sha256": "29771ea0b78c3a01161774605d318e6ebd6aadde36aef64a77c09c015833904b",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/training/groupdro.py",
+      "source_sha256": "a0ac8b55dc55a0c735734808c7b478df383c79ab8b9922e3fad37a85a8085724",
+      "empirical_sha256": "a0ac8b55dc55a0c735734808c7b478df383c79ab8b9922e3fad37a85a8085724",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/training/metrics.py",
+      "source_sha256": "ef1506e9156c61c2037be66c8d56acec4624b7ee1fc5a359515cb863dbc2165c",
+      "empirical_sha256": "ef1506e9156c61c2037be66c8d56acec4624b7ee1fc5a359515cb863dbc2165c",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "src/cxr_steganalysis/training/trainer.py",
+      "source_sha256": "513854875985bc1fb55c016a84fe4ae2f686e732c2787244992cfdc660b83bc4",
+      "empirical_sha256": "513854875985bc1fb55c016a84fe4ae2f686e732c2787244992cfdc660b83bc4",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_cluster_bootstrap.py",
+      "source_sha256": "a9d75a6499ea2a10fd943e32cb98cfb6aa5090451bc67c6821cce4ba5615a35e",
+      "empirical_sha256": "9f3a283a10babc66caa438bd646cb05706a47684eb2ba7c11edb0dd453d8a5c7",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "tests/test_evaluation_predictions.py",
+      "source_sha256": "0d776b67422a8a2332fb83d00250310fcbcf7d19869cbf1a30fd2181dc7ab728",
+      "empirical_sha256": "0d776b67422a8a2332fb83d00250310fcbcf7d19869cbf1a30fd2181dc7ab728",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_full_dataset.py",
+      "source_sha256": "b5dd84278ea7a1f99f6012461bc00bcd2feb598e0e96c9632adb4b55ad8a1d65",
+      "empirical_sha256": "b5dd84278ea7a1f99f6012461bc00bcd2feb598e0e96c9632adb4b55ad8a1d65",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_full_prepare.py",
+      "source_sha256": "96e0e471e3ad6834a9428a33a48b7852df26d644aa79c17f4669bb6db1a9df15",
+      "empirical_sha256": "96e0e471e3ad6834a9428a33a48b7852df26d644aa79c17f4669bb6db1a9df15",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_lsb_matching.py",
+      "source_sha256": "664fc0f1f2846caa4a13ade9997314f6fafec0f1b995a489441a996e8a9a4f69",
+      "empirical_sha256": "664fc0f1f2846caa4a13ade9997314f6fafec0f1b995a489441a996e8a9a4f69",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_manifest.py",
+      "source_sha256": "f6ebae03c8fb2c0b290f34b335b3d605dc17fb65e92c0a95e8d244f56f090588",
+      "empirical_sha256": "f6ebae03c8fb2c0b290f34b335b3d605dc17fb65e92c0a95e8d244f56f090588",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_metadata.py",
+      "source_sha256": "17db568acc54fd306150f53b29ef623b7818f5a20242fd52385dc1d63b50d70a",
+      "empirical_sha256": "17db568acc54fd306150f53b29ef623b7818f5a20242fd52385dc1d63b50d70a",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_metrics.py",
+      "source_sha256": "ef7c274e55e5e471cee05b4729083101395a62c32e7006b170e49e6d7fbdea73",
+      "empirical_sha256": "ef7c274e55e5e471cee05b4729083101395a62c32e7006b170e49e6d7fbdea73",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_model.py",
+      "source_sha256": "30cc9eb910544995d97b93b5b73cd4b3b15e8c3ba3e532b22350d2e5a30d57f4",
+      "empirical_sha256": "30cc9eb910544995d97b93b5b73cd4b3b15e8c3ba3e532b22350d2e5a30d57f4",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_paired_dataset.py",
+      "source_sha256": "c25750f52955e7a5681203bfea93e0374162a5759f1c290c3abc6ceab04a0d0a",
+      "empirical_sha256": "b9e9a8fbc07d06c1aecffdce6e609f2eb013fd8faf61ee587f966ebac3c5a645",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_patient_split.py",
+      "source_sha256": "b5625589d7b1a9adf2a76c274848a2ea9eb76aee2a9242a0ff54c82bc728a00d",
+      "empirical_sha256": "b5625589d7b1a9adf2a76c274848a2ea9eb76aee2a9242a0ff54c82bc728a00d",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_pilot_selection.py",
+      "source_sha256": "1c9d2a4ceb3c51ac5f9e94895bdb847c78a08ea9d07996333fc8d2b59b4ab14f",
+      "empirical_sha256": "1c9d2a4ceb3c51ac5f9e94895bdb847c78a08ea9d07996333fc8d2b59b4ab14f",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_protocol_lock.py",
+      "source_sha256": "0fd9842613e592649e066f8463f8d5e66667097e99e7e29ebd2acac7dcbd0e4a",
+      "empirical_sha256": "0fd9842613e592649e066f8463f8d5e66667097e99e7e29ebd2acac7dcbd0e4a",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_provenance.py",
+      "source_sha256": "4820fa2959327d7a010f324a572d1669e1158cfc3b4aa8751271af35854f54d7",
+      "empirical_sha256": "4820fa2959327d7a010f324a572d1669e1158cfc3b4aa8751271af35854f54d7",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_relocate_split.py",
+      "source_sha256": "b6378f022ba96a04782e8e40118ac444099ac0807743b5286f5d30f6b06439e6",
+      "empirical_sha256": "b6378f022ba96a04782e8e40118ac444099ac0807743b5286f5d30f6b06439e6",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_research_protocols.py",
+      "source_sha256": "ecbf9c63edc7dff45be48dd95cfea1ba2e3ba1e7a25d9ec8729121d84fe3c1ff",
+      "empirical_sha256": "ecbf9c63edc7dff45be48dd95cfea1ba2e3ba1e7a25d9ec8729121d84fe3c1ff",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_srm_optional.py",
+      "source_sha256": "f4e488e22a46e50e3900607db46249567dba0c94abbd7a75d4611f7723d6a712",
+      "empirical_sha256": "f4e488e22a46e50e3900607db46249567dba0c94abbd7a75d4611f7723d6a712",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_synthetic_fixture.py",
+      "source_sha256": "acdd1e0d4853fdfc6948531f83ac2dc73b8aa88859a447bfc1bda856d1ccfca1",
+      "empirical_sha256": "93aecea1424576307507bed4f04aff260ff1de302ecb11ad14ede69bc596ba39",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "tests/test_training_smoke.py",
+      "source_sha256": "58268d21cecf0ab6ea6d256ea1fd7b1410ff294adef422768db8ba190fbb357c",
+      "empirical_sha256": "58268d21cecf0ab6ea6d256ea1fd7b1410ff294adef422768db8ba190fbb357c",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/_bootstrap.py",
+      "source_sha256": "6a365928c8301cd061a0455b83bb341c7e8a58c000d668f0cb63a477d9ade80e",
+      "empirical_sha256": "338434ede1e065abd291b40c39f53a19e237c0addcc836e4192ce02e1430120f",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/train_baseline.py",
+      "source_sha256": "2a1b6a2ab23f77ac478bc2674acfb48004cae06e201694bb2c3fe53c4bde9118",
+      "empirical_sha256": "4e93f5f4bab2e4c354c3ac7c283bf95419a49bced835eaaeb0cbe587df1d3f54",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/evaluate_baseline.py",
+      "source_sha256": "543f3d23524c42394ffa239b7367d28ad3d765a945e920ee6c3981274cb65bf7",
+      "empirical_sha256": "543f3d23524c42394ffa239b7367d28ad3d765a945e920ee6c3981274cb65bf7",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/extract_srm_features.py",
+      "source_sha256": "535dd853c942f87fc72f824590eada532e6d9a3aefa6feca256b968d285afeb2",
+      "empirical_sha256": "535dd853c942f87fc72f824590eada532e6d9a3aefa6feca256b968d285afeb2",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/train_srm_baseline.py",
+      "source_sha256": "20143ea45805a82ab1afd336ca75db0ccafec33125eb74ab2bfadc086891569a",
+      "empirical_sha256": "d29de69dbdf8e316facec23f6513914c3466cff9fffdc4fc5d063e19dc28e69c",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/evaluate_srm_baseline.py",
+      "source_sha256": "9581916a3e715af2a93359860252a4976f34bfdb79a105ee6abfaa4c6fe3e73c",
+      "empirical_sha256": "9581916a3e715af2a93359860252a4976f34bfdb79a105ee6abfaa4c6fe3e73c",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/compare_predictions.py",
+      "source_sha256": "0c3536627e211b8256808c0abf5607cedfb7269178bdf8b841bc2b3c9005dd37",
+      "empirical_sha256": "0c3536627e211b8256808c0abf5607cedfb7269178bdf8b841bc2b3c9005dd37",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/full_preflight.py",
+      "source_sha256": "ce0f88aed4cbd8dc4c3ed4747e7cf643a4316bb77d1cf9a4051b03a8ddc1e548",
+      "empirical_sha256": "ce0f88aed4cbd8dc4c3ed4747e7cf643a4316bb77d1cf9a4051b03a8ddc1e548",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/prepare_full.py",
+      "source_sha256": "e3cf7053958f03e76dc34bce2af27069afb39f065c32864bc4762cba92d347d6",
+      "empirical_sha256": "94c8719bde788c1f8b69b2e53d0d7dcad371a29ca65f7d0e9f4ff04a812f45e7",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/freeze_protocol.py",
+      "source_sha256": "70ac57340587c3f0e6e2e0146c41259fe28b642fc16ede914be7f86440118154",
+      "empirical_sha256": "70ac57340587c3f0e6e2e0146c41259fe28b642fc16ede914be7f86440118154",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/create_patient_split.py",
+      "source_sha256": "d5ab9ec3c3809d38490f7ac9785a7a6bb5ef6f76499116eead13ec97acce8360",
+      "empirical_sha256": "bdb66949d7d4586b1208d3c4d0ffb2df3d853d1e003f3fe77ce34a938163c2bf",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/generate_stego.py",
+      "source_sha256": "4511c7cdfb3754475c6cd1edae4a8052e574a55fdd3f0641d93d50789a2109d6",
+      "empirical_sha256": "ddf2f7d933c68b0a033ef3baa5727a37419681b842c06384980a3895e5fcd4ec",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "source_sha256": "f7742b5efac462307b5078eb82bc41725fe07d10c5bfe32c3d1bc8879c833efb",
+      "empirical_sha256": "bcd8a9f1f7598b5672ee5458e13ba757d9533f2ffae9d933847522cc3538eb9b",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": false
+    },
+    {
+      "path": "scripts/create_synthetic_fixture.py",
+      "source_sha256": "d79a1f017fb1c9f98bbc1829e06f018d3f9a17ceabab12884350daa49885682a",
+      "empirical_sha256": "f0b8cabc4d32b194db9750c587b9d1d5f95544a06b7739f5ec1910bb48d84d18",
+      "byte_identical": false,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/inspect_metadata.py",
+      "source_sha256": "ad8fd611174c06cdd8c8d74265445e937e67bad944316599335bd09df4760b87",
+      "empirical_sha256": "ad8fd611174c06cdd8c8d74265445e937e67bad944316599335bd09df4760b87",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/audit_experiment.py",
+      "source_sha256": "033cd33170ef87b07e72d8443baa9f4fbaa3151e95ac97c7285d2cc8fd9fb246",
+      "empirical_sha256": "033cd33170ef87b07e72d8443baa9f4fbaa3151e95ac97c7285d2cc8fd9fb246",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/relocate_split.py",
+      "source_sha256": "a3b5fa85a1385cb60731d91b2dbfe2907edef64029f010239401451134536ba5",
+      "empirical_sha256": "a3b5fa85a1385cb60731d91b2dbfe2907edef64029f010239401451134536ba5",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/bootstrap_cross_view.py",
+      "source_sha256": "08d40b854ce0010a62a5e094540806cbea6e067964e7577b0a390d874969cb0e",
+      "empirical_sha256": "08d40b854ce0010a62a5e094540806cbea6e067964e7577b0a390d874969cb0e",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "scripts/smoke_research.py",
+      "source_sha256": "b535d89d74aeedd8123145e7dd94dc5db6cb5cbb226fbffc08acc781a95ceb9c",
+      "empirical_sha256": "b535d89d74aeedd8123145e7dd94dc5db6cb5cbb226fbffc08acc781a95ceb9c",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    },
+    {
+      "path": "references.bib",
+      "source_sha256": "68a579bce7a6c2043e7b7f8473fb14d4b073fcae7f7d773d95efebb99f4408aa",
+      "empirical_sha256": "68a579bce7a6c2043e7b7f8473fb14d4b073fcae7f7d773d95efebb99f4408aa",
+      "byte_identical": true,
+      "source_unchanged_since_export": true,
+      "identical_ignoring_final_whitespace": true
+    }
+  ]
+}

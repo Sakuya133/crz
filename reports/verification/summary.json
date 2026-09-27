@@ -1,0 +1,46 @@
+{
+  "status": "verified_software_not_NIH_experiment",
+  "regression": {
+    "tests": 78,
+    "passed": 77,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 9.035,
+    "skip_reason": "CUDA test opt-in; standalone environment uses CPU build"
+  },
+  "smoke": {
+    "status": "verified_on_synthetic_only",
+    "device": "cpu",
+    "seconds": 78.05330882199996,
+    "models": [
+      "highpass",
+      "srnet",
+      "srm_svm"
+    ],
+    "protocols": [
+      "A",
+      "B: mixed ERM/GroupDRO"
+    ],
+    "bootstrap_replicates": 50,
+    "dataset": "24 synthetic pairs / 12 synthetic patients, both views per patient",
+    "run_root": "outputs/synthetic_smoke_final_20260927",
+    "report_A": "reports/synthetic_verification_final/A",
+    "report_B": "reports/synthetic_verification_final/B"
+  },
+  "CLI": {
+    "checked": 25,
+    "status": "passed"
+  },
+  "source_preservation": {
+    "files_checked": 70,
+    "all_source_files_unchanged": true,
+    "original_manifest_sha256": "30232fd98dbe6b8a63490efdc894f6963cd780202a2d2cdf512157d9e2134197",
+    "historical_AP_checkpoint_sha256": "1d97e425af94ef2e12f01d4e717b55038a1a7828f2e34723f7d7885686680829",
+    "historical_PA_checkpoint_sha256": "b1ff64e09f305ed4466b0a344e1183930753256106080e951b8b27ae9107aed0"
+  },
+  "NIH_training": "not_run_in_this_package",
+  "GPU_lab": "not_yet_verified; choose Torch/CUDA build on lab host",
+  "HSMNet": "not_available_in_default_package; no author source vendored",
+  "active_training_jobs": 0
+}

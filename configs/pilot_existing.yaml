@@ -1,0 +1,52 @@
+# Scientific preset. Local paths belong in local.yaml (ignored by Git).
+project_root: ..
+dataset_profile: pilot_existing
+protocol_id: nih-images001-lsbm-fullimage-crop256-v2-A
+seed: 1337
+seeds: {split: 1337, sampling: 1337, embedding: 1337, crop: 1337, training: 1337}
+algorithm: lsb_matching
+payload_bpp: 0.2
+patch_size: 256
+patches_per_image: 1
+batch_size: 8
+epochs: 10
+early_stopping_patience: 11
+learning_rate: 0.001
+weight_decay: 0.0001
+mixed_precision: true
+num_workers: 2
+cpu_threads: 4
+srm_workers: 2
+data: {allow_grayscale_conversion: false, normalize: unit_range}
+model: {name: highpass, base_channels: 16}
+training: {train_view: AP, device: cuda, objective: erm, selection_metric: source_validation_auc}
+evaluation: {test_views: [AP, PA]}
+pilot:
+  available_only: true
+  allowed_views: [AP, PA]
+  required_image_mode: L
+  sampling_seed: 1337
+  quotas_per_view: {train: 700, validation: 100, test: 200}
+split: {train_fraction: 0.7, validation_fraction: 0.1, test_fraction: 0.2, use_official_test: true}
+paths:
+  metadata: data/metadata/Data_Entry_2017_v2020.csv
+  official_train_list: data/metadata/train_val_list.txt
+  official_test_list: data/metadata/test_list.txt
+  raw_dir: data/raw
+  stego_dir: data/stego/pilot_bpp02
+  patient_assignments: data/manifests/pilot/patient_assignments.csv
+  split_manifest: data/manifests/pilot/splits.csv
+  generation_manifest: data/manifests/pilot/stego_generation.csv
+  pair_manifest: data/manifests/pilot/cover_stego.csv
+  pilot_patient_assignments: data/manifests/pilot/patient_assignments.csv
+  pilot_pair_manifest: data/manifests/pilot/cover_stego.csv
+  output_dir: outputs/pilot
+lab:
+  expected_pilot_source_sha256: 30232fd98dbe6b8a63490efdc894f6963cd780202a2d2cdf512157d9e2134197
+  expected_assignment_source_sha256: 173b91efac029608791fca7674b630e1db0f3c666b1bd1ca47b0addb377d9978
+  models: [highpass, srnet, srm_svm]
+  training_seeds: [1337, 2026, 42]
+  svm_seed: 1337
+  c_grid: [0.01, 0.1, 1.0]
+  bootstrap_replicates: 10000
+  cohort: all

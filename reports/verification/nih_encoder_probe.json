@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "scope": "Bounded 3-image NIH PNG encoder/regeneration check; no training and no raw/stego writes",
+  "images_checked": 3,
+  "all_stego_file_sha256_match": true,
+  "not_a_new_NIH_experiment": true
+}

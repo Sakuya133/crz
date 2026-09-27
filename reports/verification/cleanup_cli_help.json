@@ -1,0 +1,133 @@
+{
+  "status": "passed",
+  "cli_checks": [
+    {
+      "script": "scripts/analyze.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/audit_experiment.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/bootstrap_cross_view.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/build_manifest.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/compare_predictions.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/create_patient_split.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/data.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/doctor.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/evaluate_baseline.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/evaluate_srm_baseline.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/extract_srm_features.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/freeze_protocol.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/full_data.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/generate_stego.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/inspect_metadata.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/lab.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/prepare_full.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/report.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/smoke.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/train_baseline.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    },
+    {
+      "script": "scripts/train_srm_baseline.py",
+      "returncode": 0,
+      "help_present": true,
+      "error": ""
+    }
+  ],
+  "seconds": 28.489117916000396,
+  "scope": "Argparse --help/import checks; not evidence of NIH training completion"
+}

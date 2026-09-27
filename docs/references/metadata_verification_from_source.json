@@ -1,0 +1,400 @@
+{
+  "checked_utc": "2026-09-26T20:01:42.933761+00:00",
+  "references": [
+    {
+      "doi": "10.1109/CVPR.2017.369",
+      "status": "verified_metadata",
+      "source": "https://api.crossref.org/works/10.1109/CVPR.2017.369",
+      "metadata": {
+        "title": [
+          "ChestX-Ray8: Hospital-Scale Chest X-Ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases"
+        ],
+        "author": [
+          {
+            "given": "Xiaosong",
+            "family": "Wang",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Yifan",
+            "family": "Peng",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Le",
+            "family": "Lu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Zhiyong",
+            "family": "Lu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mohammadhadi",
+            "family": "Bagheri",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ronald M.",
+            "family": "Summers",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              7
+            ]
+          ]
+        },
+        "published-online": null,
+        "published-print": {
+          "date-parts": [
+            [
+              2017,
+              7
+            ]
+          ]
+        },
+        "container-title": [
+          "2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)"
+        ],
+        "volume": null,
+        "issue": null,
+        "page": "3462-3471",
+        "article-number": null,
+        "license": null
+      }
+    },
+    {
+      "doi": "10.1038/s41598-019-42294-8",
+      "status": "verified_metadata",
+      "source": "https://api.crossref.org/works/10.1038/s41598-019-42294-8",
+      "metadata": {
+        "title": [
+          "Comparison of Deep Learning Approaches for Multi-Label Chest X-Ray Classification"
+        ],
+        "author": [
+          {
+            "given": "Ivo M.",
+            "family": "Baltruschat",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0003-1604-6647",
+            "authenticated-orcid": false,
+            "given": "Hannes",
+            "family": "Nickisch",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Michael",
+            "family": "Grass",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-1589-8517",
+            "authenticated-orcid": false,
+            "given": "Tobias",
+            "family": "Knopp",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Axel",
+            "family": "Saalbach",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              4,
+              23
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              4,
+              23
+            ]
+          ]
+        },
+        "published-print": null,
+        "container-title": [
+          "Scientific Reports"
+        ],
+        "volume": "9",
+        "issue": "1",
+        "page": null,
+        "article-number": "6381",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2019,
+                  4,
+                  23
+                ]
+              ],
+              "date-time": "2019-04-23T00:00:00Z",
+              "timestamp": 1555977600000
+            },
+            "content-version": "tdm",
+            "delay-in-days": 0,
+            "URL": "https://creativecommons.org/licenses/by/4.0"
+          },
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2019,
+                  4,
+                  23
+                ]
+              ],
+              "date-time": "2019-04-23T00:00:00Z",
+              "timestamp": 1555977600000
+            },
+            "content-version": "vor",
+            "delay-in-days": 0,
+            "URL": "https://creativecommons.org/licenses/by/4.0"
+          }
+        ]
+      }
+    },
+    {
+      "doi": "10.1109/TIFS.2012.2190402",
+      "status": "verified_metadata",
+      "source": "https://api.crossref.org/works/10.1109/TIFS.2012.2190402",
+      "metadata": {
+        "title": [
+          "Rich Models for Steganalysis of Digital Images"
+        ],
+        "author": [
+          {
+            "given": "Jessica",
+            "family": "Fridrich",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jan",
+            "family": "Kodovsky",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2012,
+              6
+            ]
+          ]
+        },
+        "published-online": null,
+        "published-print": {
+          "date-parts": [
+            [
+              2012,
+              6
+            ]
+          ]
+        },
+        "container-title": [
+          "IEEE Transactions on Information Forensics and Security"
+        ],
+        "volume": "7",
+        "issue": "3",
+        "page": "868-882",
+        "article-number": null,
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2012,
+                  6,
+                  1
+                ]
+              ],
+              "date-time": "2012-06-01T00:00:00Z",
+              "timestamp": 1338508800000
+            },
+            "content-version": "vor",
+            "delay-in-days": 0,
+            "URL": "https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html"
+          }
+        ]
+      }
+    },
+    {
+      "doi": "10.1109/TIFS.2018.2871749",
+      "status": "verified_metadata",
+      "source": "https://api.crossref.org/works/10.1109/TIFS.2018.2871749",
+      "metadata": {
+        "title": [
+          "Deep Residual Network for Steganalysis of Digital Images"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0002-7798-0671",
+            "authenticated-orcid": false,
+            "given": "Mehdi",
+            "family": "Boroumand",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mo",
+            "family": "Chen",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jessica",
+            "family": "Fridrich",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              5
+            ]
+          ]
+        },
+        "published-online": null,
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              5
+            ]
+          ]
+        },
+        "container-title": [
+          "IEEE Transactions on Information Forensics and Security"
+        ],
+        "volume": "14",
+        "issue": "5",
+        "page": "1181-1193",
+        "article-number": null,
+        "license": [
+          {

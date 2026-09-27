@@ -1,0 +1,10 @@
+# Copy to configs/local.yaml. Relative paths are relative to the PROJECT ROOT,
+# not to this file. No scientific settings are allowed in this path-only overlay.
+paths:
+  metadata: data/metadata/Data_Entry_2017_v2020.csv
+  official_train_list: data/metadata/train_val_list.txt
+  official_test_list: data/metadata/test_list.txt
+  raw_dir: data/raw
+# For another disk, replace raw_dir with e.g. /mnt/nih/images.
+# Imported pilot manifests may use another disk as long as each path is explicit.
+# stego_dir is configurable separately, and must never point inside raw_dir.

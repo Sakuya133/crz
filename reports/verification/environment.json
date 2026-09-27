@@ -1,0 +1,33 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "executable": "/home/tsakuya/researche/cxr-steganalysis-empirical/.venv/bin/python",
+  "isolated_venv": true,
+  "torch_runtime": "2.13.0+cpu",
+  "torch_cuda_build": null,
+  "cuda_available": false,
+  "gpus": [],
+  "ram_total_gib": 27.090526580810547,
+  "ram_available_gib": 18.994766235351562,
+  "project_disk_free_gib": 108.7129135131836,
+  "packages": {
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "Pillow": "12.3.0",
+    "PyYAML": "6.0.3",
+    "matplotlib": "3.11.2",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "psutil": "7.2.2",
+    "sealwatch": "2025.9",
+    "pytest": "9.1.1"
+  },
+  "pip_check": "No broken requirements found.",
+  "nvidia_driver_query": {
+    "returncode": 0,
+    "output": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB, 595.91.07",
+    "note": "Driver visibility does not imply this Torch build supports CUDA"
+  },
+  "status": "ready",
+  "errors": []
+}
