@@ -65,45 +65,46 @@ Prepare streaming satu gambar penuh, record atomic per gambar; command sama dapa
 diulang untuk resume setelah memverifikasi checksum record. Tidak memuat semua
 gambar ke RAM. Tidak ada lazy embedding/crop yang belum dibuktikan ekuivalen.
 
-## Training, test lock, evaluasi
+## Kontrol ukuran (analisis utama), lock, training, evaluasi
+
+Analisis **utama** = `configs/full_size_matched.yaml`: subset baris dari manifest full
+(file cover/stego sama, tidak disalin). Per split train/validation diambil
+min(AP, PA) pasangan per view, urutan `stable_seed(seeds.sampling=20261002, pair_id,
+split)`; assignment pasien tidak berubah; test tidak dikurangi. Subset sama untuk semua
+model dan training seed. `full_all_eligible` = analisis **tambahan**. Pasangan setara
+tidak berarti pasien setara (proyeksi train: AP 6.797 vs PA 15.191 pasien) — laporkan
+sebagai keterbatasan; lihat `counts_control` di `size_matched/size_control.json`.
 
 ```bash
-python scripts/lab.py --dry-run --config configs/full_all_eligible.yaml \
-  --local configs/full.local.yaml --models highpass srnet --seeds 1337 \
-  --output outputs/full_bpp02_seed1337
-python -u scripts/lab.py --execute --config configs/full_all_eligible.yaml \
-  --local configs/full.local.yaml --models highpass srnet --seeds 1337 \
-  --output outputs/full_bpp02_seed1337 --budget-hours 8
-python -u scripts/lab.py --execute --resume --config configs/full_all_eligible.yaml \
-  --local configs/full.local.yaml --models highpass srnet --seeds 1337 \
-  --output outputs/full_bpp02_seed1337 --budget-hours 8
+python scripts/full_data.py size-control --config configs/full_size_matched.yaml
+python scripts/doctor.py --config configs/full_size_matched.yaml --data --require-cuda
+# SATU lock untuk seluruh rencana bpp0.2: kedua preset, highpass+srnet, AP/PA,
+# training seed 1337/2026/42, hyperparameter, metrik, perbandingan. Sekali saja.
+python scripts/freeze_protocol.py --plan configs/full_size_matched.yaml configs/full_all_eligible.yaml
 ```
 
-Runner menyelesaikan semua training yang dideklarasikan sebelum membuka test;
-menulis freeze berisi scientific settings + semantic manifest, lalu hanya
-`confirmatory_unseen_patient` dievaluasi. Freeze audit bukan bukti bahwa manusia
-tidak pernah melihat pasien itu sebelumnya. Rencanakan semua seed/model/budget
-sebelum membuka test tambahan; jika masih perlu tuning via validation, gunakan
-low-level train saja dan jangan jalankan evaluator/queue lengkap.
-
-Stage manual yang juga tersedia:
+`lab.py --execute` untuk preset full menolak mulai bila lock belum ada atau run tidak
+tercantum di dalamnya; evaluator confirmatory memeriksa lock yang sama. Run boleh
+bertahap per seed, tetapi semuanya harus anggota lock tersebut. Perubahan resep
+setelah lock = rencana baru dengan lock/output baru, bukan menimpa.
 
 ```bash
-python scripts/freeze_protocol.py --run-configs \
-  outputs/<run_AP>/effective_config.yaml outputs/<run_PA>/effective_config.yaml \
-  --manifest data/manifests/full/bpp02/cover_stego.csv \
-  --output outputs/full_protocol_lock.json
-python scripts/evaluate_baseline.py --config outputs/<queue>/configs/<run_AP>.yaml \
-  --checkpoint outputs/<run_AP>/checkpoints/best.pt \
-  --test-cohort confirmatory_unseen_patient --protocol-lock outputs/full_protocol_lock.json \
-  --output outputs/<run_AP>/evaluation/cross_view
-python scripts/analyze.py --run-root outputs/full_bpp02_seed1337 --replicates 10000
-python scripts/report.py --run-root outputs/full_bpp02_seed1337 --output reports/full_bpp02_seed1337
+python scripts/lab.py --dry-run --config configs/full_size_matched.yaml --seeds 1337 \
+  --output outputs/full_size_matched_seed1337
+python -u scripts/lab.py --execute --config configs/full_size_matched.yaml --seeds 1337 \
+  --output outputs/full_size_matched_seed1337 --budget-hours 8
+# terputus/budget habis: ulangi dengan --resume. Lalu --seeds 2026 dan 42 (output baru),
+# kemudian configs/full_all_eligible.yaml dengan pola yang sama (outputs/full_bpp02_seed*).
+python scripts/report.py --run-root outputs/full_size_matched_seed1337 \
+  --output reports/full_size_matched_seed1337
 ```
 
-Placeholder `<run_AP>` harus diganti direktori yang ditampilkan dry-run; CLI tidak
-memerlukan placeholder literal. Exposed cohort, bila dianalisis, harus ke report
-root terpisah dan diberi nama exploratory, bukan pooled confirmatory.
+Hanya `confirmatory_unseen_patient` dievaluasi. Kohort ini = pasien official-test yang
+tidak punya gambar terevaluasi di pilot (58 pasien pilot test = `pilot_exposed`),
+termasuk 4 pasien terkunci test di pilot yang tidak terpilih kuota (661, 849, 886,
+1330); diputuskan tetap confirmatory: tidak dipakai train/validation, tidak pernah
+dievaluasi, dan tidak memengaruhi pengembangan model. Lock bukan bukti bahwa manusia tidak pernah melihat pasien itu. Exposed
+cohort, bila dianalisis, ke report root terpisah sebagai exploratory.
 
 ## Perhitungan sumber daya
 

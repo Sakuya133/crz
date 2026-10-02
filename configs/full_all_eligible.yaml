@@ -10,9 +10,12 @@ paths:
   generation_manifest: data/manifests/full/bpp02/stego_generation.csv
   stego_dir: data/manifests/full/bpp02/stego
   output_dir: outputs/full
+  # One pre-test lock for the whole bpp0.2 plan (both presets, all seeds).
+  protocol_lock: data/manifests/full/bpp02/protocol_plan_lock.json
 lab:
   models: [highpass, srnet]
   cohort: confirmatory_unseen_patient
+  analysis_role: secondary
 expansion:
   training_seeds: [1337, 2026, 42]
   payloads_bpp: [0.2, 0.1, 0.4]

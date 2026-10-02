@@ -105,7 +105,9 @@ class Trainer:
     ) -> tuple[torch.Tensor, torch.Tensor]:
         if logits.ndim == 1:
             loss = self.binary_criterion(logits, labels)
-            return loss, torch.sigmoid(logits)
+            # float32 scores: fp16 sigmoid under AMP creates ties in validation AUC,
+            # which drives checkpoint selection.
+            return loss, torch.sigmoid(logits.float())
         if logits.ndim == 2 and logits.shape[1] == 2:
             loss = self.multiclass_criterion(logits, labels.to(torch.long))
             return loss, torch.softmax(logits, dim=1)[:, 1]

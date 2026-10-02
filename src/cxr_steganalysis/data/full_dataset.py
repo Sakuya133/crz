@@ -121,3 +121,44 @@ def full_preflight(config, output):
                    confirmatory_evaluation_requires_explicit_protocol_lock=True)
     (output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     return summary
+
+
+def build_size_control(config):
+    """Write the size-matched manifest as a row subset of the prepared full manifest.
+
+    Reuses the same cover/stego files; nothing is re-embedded or copied.
+    """
+    from cxr_steganalysis.data.portable import read_pairs
+    from cxr_steganalysis.experiment import effective_seeds, enrollment_counts, manifest_identity, select_size_matched
+    from cxr_steganalysis.lab import atomic_json
+    source = resolve_config_path(config, "size_control_source_manifest")
+    target = resolve_config_path(config, "pair_manifest")
+    if source == target or target.parent == source.parent:
+        raise ValueError("Size-control manifest needs its own directory next to, not over, the full manifest")
+    complete = json.loads((source.parent / "complete.json").read_text())
+    if complete["manifest_sha256"] != sha256_file(source):
+        raise ValueError("Full manifest is incomplete or changed after prepare; finish full_data.py prepare first")
+    frame = read_pairs(source)
+    seed = effective_seeds(config)["sampling"]
+    control = select_size_matched(frame, seed)
+    text = control.to_csv(index=False)
+    if target.exists() and target.read_text() != text:
+        raise ValueError(f"Existing size-control manifest differs; refusing overwrite: {target}")
+    if not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_suffix(".tmp.csv")
+        temporary.write_text(text)
+        temporary.replace(target)
+    quotas = {s: int((control.split == s).sum() // 2) for s in ("train", "validation")}
+    receipt = dict(rule="train/validation: per split, min(AP, PA) pairs per view, ordered by stable_seed(sampling_seed, pair_id, split); test: all pairs kept",
+                   sampling_seed=seed, seed_role="fixed for all models and training seeds; independent of training seed",
+                   pairs_per_view=quotas, source_manifest=str(source), source_manifest_sha256=sha256_file(source),
+                   source_identity=manifest_identity(frame), control_manifest_sha256=sha256_file(target),
+                   control_identity=manifest_identity(control), counts_source=enrollment_counts(frame),
+                   counts_control=enrollment_counts(control),
+                   note="Equal pairs per view do not imply equal patients; see counts")
+    receipt_path = target.parent / "size_control.json"
+    if receipt_path.exists() and json.loads(receipt_path.read_text()) != receipt:
+        raise ValueError(f"Existing size-control receipt differs: {receipt_path}")
+    atomic_json(receipt_path, receipt)
+    return receipt

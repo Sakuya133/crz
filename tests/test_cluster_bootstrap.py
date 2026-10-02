@@ -135,8 +135,10 @@ def test_bootstrap_file_provenance_and_outputs(tmp_path, paired_predictions):
     matched, mismatched = paired_predictions
     matched_path = tmp_path / "matched_predictions.csv"
     mismatched_path = tmp_path / "mismatched_predictions.csv"
-    matched.to_csv(matched_path, index=False)
-    mismatched.to_csv(mismatched_path, index=False)
+    # Lab files contain both targets; the other target must be filtered out.
+    other = lambda f: f.assign(target_view="AP", view_position="AP")
+    pd.concat([matched, other(matched)]).to_csv(matched_path, index=False)
+    pd.concat([mismatched, other(mismatched)]).to_csv(mismatched_path, index=False)
     results = bootstrap_prediction_files(
         matched_path,
         mismatched_path,

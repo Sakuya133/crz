@@ -1,0 +1,15 @@
+# PRIMARY analysis. Same enrollment, stego files, assignments and recipe as
+# full_all_eligible, but train/validation pairs are subsampled within each locked
+# split to min(AP, PA) so source view is not confounded with training-set size.
+# Test is never subsampled: every model sees the same confirmatory target cohort.
+extends: full_all_eligible.yaml
+dataset_profile: full_size_matched
+protocol_id: nih-full-sizematched-lsbm-fullimage-crop256-v1-A
+# Fixed for every model/training seed; deliberately not one of the training seeds.
+seeds: {sampling: 20261002}
+paths:
+  size_control_source_manifest: data/manifests/full/bpp02/cover_stego.csv
+  pair_manifest: data/manifests/full/bpp02/size_matched/cover_stego.csv
+  output_dir: outputs/full_size_matched
+lab:
+  analysis_role: primary

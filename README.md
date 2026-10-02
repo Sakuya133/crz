@@ -59,7 +59,8 @@ Test tidak untuk tuning. Runner serial; tidak mengganti training NIH ke CPU.
 ## Opsi
 
 - ERM/GroupDRO terpisah: `--config configs/pilot_mixed.yaml`, output baru.
-- Full NIH: `configs/full_all_eligible.yaml`; [command full](docs/FULL_NIH_RUNBOOK.md).
+- Full NIH: utama `configs/full_size_matched.yaml` (AP/PA train/val setara), tambahan
+  `configs/full_all_eligible.yaml`; satu lock seluruh rencana; [command full](docs/FULL_NIH_RUNBOOK.md).
 - [Protokol](docs/PROTOCOL.md) · [Referensi metode](docs/METHODS_AND_REFERENCES.md).
 - Smoke sintetis: `python scripts/smoke.py --output outputs/smoke_lab` (output baru).
 - Entry point tetap di `scripts/`, modul di `src/`, preset di `configs/`, tes di `tests/`.

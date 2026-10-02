@@ -19,6 +19,7 @@ import psutil
 from cxr_steganalysis.config import resolve_config_path, serializable_config
 from cxr_steganalysis.experiment import effective_seeds
 from cxr_steganalysis.lab import atomic_json, write_config
+from cxr_steganalysis.protocol_lock import verify_plan_membership
 from cxr_steganalysis.provenance import sha256_file
 
 LOCK_DIRECTORY = Path(__file__).resolve().parents[2] / "outputs"
@@ -74,10 +75,10 @@ def make_plan(config, output, models=None, seeds=None, sources=None, feature_cac
                         add(name + "_train", "svm", [run / "model.json", run / "model.npz", run / "effective_config.yaml"], args, run_dir=str(run))
                     else:
                         add(name + "_train", "cnn", [run / "logs/summary.json", run / "checkpoints/best.pt", run / "checkpoints/last.pt"], ["scripts/train_baseline.py", "--config", path, "--output-dir", run], run_dir=str(run))
-    full = config.get("dataset_profile") == "full_all_eligible"
-    lock = output / "confirmatory_protocol_lock.json"
-    if full:
-        add("freeze_confirmatory", "freeze", [lock], ["scripts/freeze_protocol.py", "--run-configs", *[Path(r["directory"]) / "effective_config.yaml" for r in runs], "--manifest", resolve_config_path(config, "pair_manifest"), "--output", lock])
+    # Full presets share one whole-plan lock created by freeze_protocol.py --plan
+    # before any queue starts; execute() refuses runs that it does not list.
+    full = config.get("dataset_profile") in {"full_all_eligible", "full_size_matched"}
+    lock = resolve_config_path(config, "protocol_lock") if full else None
     # Finish all predeclared training/validation before opening any target tests.
     for r in runs:
         run = Path(r["directory"])
@@ -90,7 +91,10 @@ def make_plan(config, output, models=None, seeds=None, sources=None, feature_cac
         add(r["id"] + "_evaluate", "evaluation", markers, args)
     add("analysis", "analysis", [output / "statistics/complete.json"], ["scripts/analyze.py", "--run-root", output, "--replicates", config["lab"].get("bootstrap_replicates", 10000)])
     add("report", "report", [output / "report/README.md", output / "report/metrics.csv"], ["scripts/report.py", "--run-root", output, "--output", output / "report"])
-    return dict(protocol=protocol, dataset_profile=config["dataset_profile"], runs=runs, stages=stages, output=str(output)), configs
+    plan = dict(protocol=protocol, dataset_profile=config["dataset_profile"], runs=runs, stages=stages, output=str(output))
+    if full:
+        plan["protocol_lock"] = str(lock)
+    return plan, configs
 
 
 def plan_identity(plan, configs):
@@ -120,6 +124,8 @@ def execute(plan, configs, root, *, resume=False, budget_hours=8, validate_input
     root = Path(root).resolve()
     source_root = Path(__file__).resolve().parents[2]
     scientific = next(iter(configs.values()))
+    if plan.get("protocol_lock"):
+        verify_plan_membership(plan["protocol_lock"], [configs[Path(r["config"])] for r in plan["runs"]])
     if validate_inputs:
         import torch
         from cxr_steganalysis.data.portable import check_data
@@ -161,7 +167,11 @@ def execute(plan, configs, root, *, resume=False, budget_hours=8, validate_input
             if stop[0] or time.monotonic() >= deadline:
                 state["status"] = "pending"; persist(); return 124
             command = list(stage["command"])
-            if stage["kind"] == "svm":
+            # A CNN killed before its first epoch checkpoint leaves only provenance;
+            # train_baseline.py refuses non-empty directories, so archive it and
+            # restart from epoch 0 instead of failing on every --resume.
+            cnn_without_checkpoint = stage["kind"] == "cnn" and not (Path(stage["run_dir"]) / "checkpoints/last.pt").exists()
+            if stage["kind"] == "svm" or cnn_without_checkpoint:
                 previous_run = Path(stage["run_dir"])
                 if previous_run.exists() and any(previous_run.iterdir()):
                     archive = root / "interrupted_artifacts" / (stage["id"] + "_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))

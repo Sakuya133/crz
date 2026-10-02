@@ -128,6 +128,20 @@ def test_queue_failure_exit_status_and_budget_not_completed(tmp_path):
     assert execute(plan,configs,root,resume=True,validate_inputs=False)==0
 
 
+def test_queue_restarts_cnn_killed_before_first_checkpoint(tmp_path):
+    root,marker,plan,configs=minimal_queue(tmp_path)
+    run,crashed=root/"run",tmp_path/"crashed"
+    plan["stages"][0].update(kind="cnn",run_dir=str(run))
+    # First attempt dies during epoch 0 after writing provenance only.
+    code=("import pathlib,sys; r,c,m=map(pathlib.Path,sys.argv[1:])\n"
+          "if not c.exists(): c.touch(); r.mkdir(); (r/'provenance.json').write_text('{}'); sys.exit(1)\n"
+          "assert not r.exists(); m.write_text('{}')")
+    plan["stages"][0]["command"]=[sys.executable,"-c",code,str(run),str(crashed),str(marker)]
+    assert execute(plan,configs,root,validate_inputs=False)==1
+    assert execute(plan,configs,root,resume=True,validate_inputs=False)==0
+    assert (Path(json.loads((root/"queue.json").read_text())["stages"][0]["preserved_incomplete_fit"])/"provenance.json").is_file()
+
+
 def test_mitigation_plan_has_macro_selection_and_equal_data(tmp_path):
     config=load_config("configs/pilot_mixed.yaml")
     plan,configs=make_plan(config,tmp_path/"B",seeds=[1337])
@@ -161,7 +175,7 @@ def test_doctor_accepts_existing_runtime_without_project_venv(monkeypatch, capsy
     assert report["warnings"]  # Record external paths without requiring a new env.
 
 
-def test_synthetic_full_extension_preserves_exposed_patients(portable_fixture):
+def synthetic_full(portable_fixture):
     from PIL import Image
     import numpy as np
     from cxr_steganalysis.data.full_dataset import full_preflight
@@ -186,6 +200,12 @@ def test_synthetic_full_extension_preserves_exposed_patients(portable_fixture):
     assert result["missing_images"]==0 and result["patients_locked"]==12
     script("full_data").ready(inventory)
     script("prepare_full").prepare(config,inventory,inventory/"bpp02")
+    return root,config,inventory
+
+
+def test_synthetic_full_extension_preserves_exposed_patients(portable_fixture):
+    from cxr_steganalysis.config import resolve_config_path
+    root,config,inventory=synthetic_full(portable_fixture)
     assert check_data(config,True)["pairs"]==28
     frame=pd.read_csv(resolve_config_path(config,"pair_manifest"),dtype={"patient_id":str})
     assert set(frame.loc[frame.test_cohort=="pilot_exposed","patient_id"])=={"10","11"}
@@ -194,3 +214,36 @@ def test_synthetic_full_extension_preserves_exposed_patients(portable_fixture):
     # A hidden "full" subsample is rejected even if ordinary disjoint checks pass.
     frame.iloc[1:].to_csv(resolve_config_path(config,"pair_manifest"),index=False)
     with pytest.raises(ValueError,match="every eligible image"):check_data(config)
+
+
+def test_size_control_reuses_files_decodes_once_and_rejects_tampering(portable_fixture):
+    from cxr_steganalysis.config import resolve_config_path
+    from cxr_steganalysis.data.full_dataset import build_size_control
+    root,config,inventory=synthetic_full(portable_fixture)
+    full=pd.read_csv(resolve_config_path(config,"pair_manifest"),dtype={"patient_id":str})
+    # Make PA train larger than AP train (as in NIH) by dropping AP train images from the full manifest copy.
+    source=inventory/"bpp02_unbalanced/cover_stego.csv"; source.parent.mkdir()
+    drop=full[(full.split=="train")&(full.view_position=="AP")].pair_id.head(3)
+    full[~full.pair_id.isin(drop)].to_csv(source,index=False)
+    (source.parent/"complete.json").write_text(json.dumps(dict(manifest_sha256=sha256_file(source))))
+    control=deepcopy(config)
+    control.update(dataset_profile="full_size_matched",protocol_id="SYNTHETIC-ONLY-size-matched")
+    control["seeds"]["sampling"]=20261002
+    control["paths"].update(size_control_source_manifest=str(source),pair_manifest=str(inventory/"size_matched/cover_stego.csv"))
+    receipt=build_size_control(control)
+    assert receipt["pairs_per_view"]=={"train":5,"validation":2} and receipt["sampling_seed"]==20261002
+    frame=pd.read_csv(inventory/"size_matched/cover_stego.csv",dtype={"patient_id":str})
+    assert set(frame.stego_path)<=set(full.stego_path)  # same files, no copies
+    assert (frame.split=="test").sum()==(full.split=="test").sum()
+    assert build_size_control(control)==receipt  # idempotent, never redrawn
+    # The full-enrollment check applies to the source; this unbalanced copy is not complete.
+    with pytest.raises(ValueError,match="every eligible image"):check_data(control)
+    control["paths"]["size_control_source_manifest"]=str(resolve_config_path(config,"pair_manifest"))
+    other=inventory/"size_matched_full"; control["paths"]["pair_manifest"]=str(other/"cover_stego.csv")
+    build_size_control(control)
+    first=check_data(control)
+    assert first["files_fully_decoded"]==2*first["pairs"]
+    assert check_data(control)["files_fully_decoded"]==0  # header-only re-check
+    tampered=pd.read_csv(other/"cover_stego.csv",dtype={"patient_id":str})
+    tampered.iloc[1:].to_csv(other/"cover_stego.csv",index=False)
+    with pytest.raises(ValueError,match="deterministic subset"):check_data(control)

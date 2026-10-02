@@ -37,6 +37,30 @@ def select_mixed_training(frame, per_view, seed):
     return pd.concat(pieces, ignore_index=True)
 
 
+def select_size_matched(frame, seed):
+    """Equalize AP/PA pairs per train/validation split at min(AP, PA).
+
+    Pairs are drawn inside the locked splits (assignments untouched); test is kept
+    whole so every model is evaluated on the same target cohort. Equal pairs do not
+    imply equal patients.
+    """
+    pieces = [frame[frame.split == "test"]]
+    for split in ("train", "validation"):
+        pools = {view: frame[(frame.split == split) & (frame.view_position == view)].copy() for view in ("AP", "PA")}
+        quota = min(len(pool) for pool in pools.values())
+        if quota == 0:
+            raise ValueError(f"Size control impossible: empty {split} view")
+        for view, pool in pools.items():
+            pool["_order"] = [stable_seed(seed, p, split, "size-matched") for p in pool.pair_id]
+            pieces.append(pool.sort_values(["_order", "pair_id"]).head(quota).drop(columns="_order"))
+    return pd.concat(pieces, ignore_index=True)
+
+
+def enrollment_counts(frame):
+    group = ["split", "view_position"] + (["test_cohort"] if "test_cohort" in frame else [])
+    return frame.groupby(group).agg(pairs=("pair_id", "size"), patients=("patient_id", "nunique")).reset_index().to_dict("records")
+
+
 def save_run_provenance(output, config, binding):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)

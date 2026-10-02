@@ -1,3 +1,8 @@
+# Local AI-assistant settings/notes
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
 .venv/
 venv/
 __pycache__/

@@ -299,9 +299,14 @@ def bootstrap_prediction_files(
     replicates: int = 10_000,
     seed: int = 1337,
 ) -> dict[str, Any]:
+    # Lab prediction files hold both targets; compare only the requested target.
+    matched, mismatched = (
+        frame[frame["target_view"] == target_view.upper()]
+        for frame in (load_prediction_file(matched_path), load_prediction_file(mismatched_path))
+    )
     return patient_cluster_paired_bootstrap(
-        load_prediction_file(matched_path),
-        load_prediction_file(mismatched_path),
+        matched,
+        mismatched,
         target_view=target_view,
         replicates=replicates,
         seed=seed,

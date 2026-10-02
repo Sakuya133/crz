@@ -14,7 +14,7 @@ from cxr_steganalysis.config import resolve_config_path
 from cxr_steganalysis.data.manifest import validate_pair_manifest, make_pair_id
 from cxr_steganalysis.data.metadata import load_metadata, read_image_list
 from cxr_steganalysis.data.split import assert_patient_disjoint, validate_official_patient_partition
-from cxr_steganalysis.experiment import effective_seeds, manifest_identity
+from cxr_steganalysis.experiment import effective_seeds, manifest_identity, select_size_matched
 from cxr_steganalysis.lab import atomic_json, require_empty
 from cxr_steganalysis.provenance import sha256_file
 from cxr_steganalysis.stego.lsb_matching import embed_lsb_matching_file
@@ -226,7 +226,20 @@ def check_data(config, verify_hashes=False):
     assignments = pd.read_csv(resolve_config_path(config, "patient_assignments"), dtype={"patient_id": str})
     png_index(resolve_config_path(config, "raw_dir"))
     validate_enrollment(frame, assignments, config)
-    if config.get("dataset_profile") == "full_all_eligible":
+    profile = config.get("dataset_profile")
+    full_frame = frame
+    if profile == "full_size_matched":
+        # The control must be exactly the deterministic subset of the complete
+        # full manifest; the full manifest itself gets the full-enrollment checks.
+        source = resolve_config_path(config, "size_control_source_manifest")
+        receipt = json.loads((manifest.parent / "size_control.json").read_text())
+        full_frame = read_pairs(source)
+        seed = effective_seeds(config)["sampling"]
+        if sha256_file(source) != receipt["source_manifest_sha256"] or receipt["sampling_seed"] != seed:
+            raise ValueError("Size control receipt no longer matches the full manifest/sampling seed")
+        if manifest_identity(select_size_matched(full_frame, seed)) != manifest_identity(frame):
+            raise ValueError("Size-matched manifest is not the deterministic subset of the full manifest")
+    if profile in {"full_all_eligible", "full_size_matched"}:
         snapshot = resolve_config_path(config, "split_manifest")
         summary = json.loads((snapshot.parent / "summary.json").read_text())
         if summary["missing_images"] or summary["exclusions"].get("unreadable_requires_retrieval", 0):
@@ -237,7 +250,7 @@ def check_data(config, verify_hashes=False):
             if sha256_file(path) != digest:
                 raise ValueError("Full metadata/official/pilot binding changed")
         enrollment = pd.read_csv(snapshot, dtype={"patient_id":str})
-        if set(frame.image_id) != set(enrollment.image_id) or len(frame) != len(enrollment):
+        if set(full_frame.image_id) != set(enrollment.image_id) or len(full_frame) != len(enrollment):
             raise ValueError("Full manifest must retain every eligible image; no resampling")
     validate_pair_manifest(frame, verify_hashes=verify_hashes)
     # Avoid rehashing unchanged audited PNGs on every queue resume. Any changed
@@ -253,15 +266,23 @@ def check_data(config, verify_hashes=False):
             if sha256_file(path) != info[2]:
                 raise ValueError(f"Changed image checksum mismatch: {path}")
             rechecked += 1
+    # Checksums prove byte identity, not decodability. Fully decode every file
+    # not yet decoded under this receipt; files already decoded with unchanged
+    # path/size/mtime/hash get a header-only size check (saves ~30 min/resume).
+    decoded_before = previous.get("png_decode_verified", False)
+    decoded = 0
     for row in frame.itertuples():
         for path in (row.cover_path, row.stego_path):
+            key = str(Path(path).resolve())
             with Image.open(path) as im:
-                im.load()
+                if not (decoded_before and recorded.get(key) == current[key]):
+                    im.load()
+                    decoded += 1
                 if min(im.size) < config["patch_size"]:
                     raise ValueError(f"Image smaller than crop: {path}")
     counts = frame.groupby(["split", "view_position"]).agg(pairs=("pair_id", "size"), patients=("patient_id", "nunique")).reset_index().to_dict("records")
-    atomic_json(receipt_path, dict(manifest_sha256=sha256_file(manifest), files=current))
+    atomic_json(receipt_path, dict(manifest_sha256=sha256_file(manifest), files=current, png_decode_verified=True))
     return dict(status="ready", pairs=len(frame), patients=int(frame.patient_id.nunique()), counts=counts,
                 manifest_sha256=sha256_file(manifest), manifest_identity=manifest_identity(frame),
-                checksums_verified=verify_hashes, changed_files_rehashed=rechecked,
+                checksums_verified=verify_hashes, changed_files_rehashed=rechecked, files_fully_decoded=decoded,
                 unchanged_byte_binding="Previously verified hashes reused only when path/size/mtime and manifest binding agree", seeds=effective_seeds(config))

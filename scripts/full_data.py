@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inventory or materialize full NIH; never download, extract archives, or train."""
+"""Inventory, materialize, or size-control full NIH; never download, extract archives, or train."""
 import argparse
 import json
 from pathlib import Path
@@ -7,7 +7,7 @@ from _bootstrap import bootstrap
 bootstrap()
 from cxr_steganalysis.lab import load_lab_config, atomic_json
 from cxr_steganalysis.config import resolve_config_path
-from cxr_steganalysis.data.full_dataset import full_preflight
+from cxr_steganalysis.data.full_dataset import build_size_control, full_preflight
 from cxr_steganalysis.data.portable import read_pairs
 from cxr_steganalysis.provenance import sha256_file
 from doctor import resources
@@ -38,12 +38,15 @@ def ready(preflight):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("action", choices=["preflight","prepare"])
+    p.add_argument("action", choices=["preflight","prepare","size-control"])
     p.add_argument("--config", type=Path, default=Path("configs/full_all_eligible.yaml"))
     p.add_argument("--local", type=Path)
     p.add_argument("--preflight", type=Path, help="Default: configured split_manifest parent")
     a = p.parse_args()
     config = load_lab_config(a.config,a.local)
+    if a.action == "size-control":
+        if config.get("dataset_profile") != "full_size_matched": raise ValueError("size-control requires configs/full_size_matched.yaml")
+        print(json.dumps(build_size_control(config),indent=2)); return
     if config.get("dataset_profile") != "full_all_eligible": raise ValueError("Full command requires full_all_eligible preset")
     preflight = a.preflight or resolve_config_path(config,"split_manifest").parent
     if a.action == "preflight":

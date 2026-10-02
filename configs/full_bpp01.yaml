@@ -5,3 +5,4 @@ paths:
   generation_manifest: data/manifests/full/bpp01/stego_generation.csv
   stego_dir: data/manifests/full/bpp01/stego
   output_dir: outputs/full_bpp01
+  protocol_lock: data/manifests/full/bpp01/protocol_plan_lock.json
